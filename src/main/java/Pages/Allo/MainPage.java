@@ -1,4 +1,4 @@
-package Pages.Csn;
+package Pages.Allo;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,9 +14,9 @@ public class MainPage extends BasePage {
 
     @Override
     public void initialWait(WebDriver driver) {
-        waitUtils.waitForElementToBeVisible(scrollPhotosSection);
+        waitUtils.waitForElementToBeVisible(homeBannerPagination);
     }
 
-    @FindBy(xpath = ".//div[@class='scroll_photos']")
-    private WebElement scrollPhotosSection;
+    @FindBy(xpath = "//div[@class='home-banner__pagination']")
+    private WebElement homeBannerPagination;
 }

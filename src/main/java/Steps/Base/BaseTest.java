@@ -1,4 +1,4 @@
-package Base;
+package Steps.Base;
 
 import DriverFactory.DriverFactory;
 import io.cucumber.java.After;

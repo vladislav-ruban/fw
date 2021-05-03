@@ -1,20 +1,16 @@
 package Utils;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 public class WaitUtils {
     private final int TIMEOUT = 15;
-    private final int POLLING = 100;
 
     WebDriver driver;
     private WebDriverWait wait;
@@ -23,10 +19,6 @@ public class WaitUtils {
     public WaitUtils(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, TIMEOUT);
-        fluentWait = new FluentWait(driver)
-                .withTimeout(Duration.ofSeconds(TIMEOUT))
-                .pollingEvery(Duration.ofMillis(POLLING))
-                .ignoring(StaleElementReferenceException.class);
     }
 
     public void waitForElementToBeClickable(WebElement element) {
@@ -38,37 +30,37 @@ public class WaitUtils {
     }
 
     public void waitForElementToBeVisible(WebElement element) {
-        fluentWait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public void waitForElementsToBeVisible(List<WebElement> listWebElements) {
-        fluentWait.until(ExpectedConditions.visibilityOfAllElements(listWebElements));
+        wait.until(ExpectedConditions.visibilityOfAllElements(listWebElements));
     }
 
     public void waitForElementToBeInvisible(WebElement element) {
-        fluentWait.until(ExpectedConditions.invisibilityOf(element));
+        wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
     public void waitForElementsToBeInvisible(List<WebElement> listWebElements) {
-        fluentWait.until(ExpectedConditions.invisibilityOfAllElements(listWebElements));
+        wait.until(ExpectedConditions.invisibilityOfAllElements(listWebElements));
     }
 
     public void waitForElementToContainText(WebElement element) {
         if (!element.getText()
-                    .isEmpty()) fluentWait.until(driver -> element.getText()
-                                                                  .length() > 0);
+                    .isEmpty()) wait.until(driver -> element.getText()
+                                                            .length() > 0);
     }
 
     public void waitForElementPresenceBy(By locator) {
-        fluentWait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     public void waitForElementsPresenceBy(By locator) {
-        fluentWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
     }
 
     public void waitForElementToBeClickable(By locator) {
-        fluentWait.until(ExpectedConditions.elementToBeClickable(locator));
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     public void waitForElementToBeVisibleAfterRefresh(WebElement element) {

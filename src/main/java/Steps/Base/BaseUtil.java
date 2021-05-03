@@ -1,4 +1,4 @@
-package Base;
+package Steps.Base;
 
 import org.openqa.selenium.WebDriver;
 
