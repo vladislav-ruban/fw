@@ -54,11 +54,8 @@ public class SearchResultsPage extends BasePage {
     }
 
     public void verifyThatAllProductCardsAreSortedByPriceLowToHigh() {
-        List<Integer> productCardsPricesInt = new ArrayList<>();
+        Integer[] productCardsPricesArray = listOfWebElementsParseToIntArray(productCardsPrices);
 
-        for (WebElement price : productCardsPrices)
-            productCardsPricesInt.add(Converters.stringCutAndParseToInt(price.getText()));
-        Integer[] productCardsPricesArray = (Integer[]) productCardsPricesInt.toArray(new Integer[productCardsPricesInt.size()]);
         boolean flag = true;
         for (int i = 1; i < productCardsPricesArray.length; i++) {
             flag = false;
@@ -69,6 +66,29 @@ public class SearchResultsPage extends BasePage {
                   .as("Prices are sorted high to low\n" +
                           "Expected: low to high")
                   .isTrue();
+    }
+
+    public void verifyThatAllProductCardsAreSortedByPriceHighToLow() {
+        Integer[] productCardsPricesArray = listOfWebElementsParseToIntArray(productCardsPrices);
+
+        boolean flag = true;
+        for (int i = 1; i >= productCardsPricesArray.length; i++) {
+            flag = false;
+            break;
+        }
+
+        Assertions.assertThat(flag)
+                  .as("Prices are sorted low to high\n" +
+                          "Expected: high to low")
+                  .isTrue();
+    }
+
+    private Integer[] listOfWebElementsParseToIntArray(List<WebElement> webElementsList) {
+        List<Integer> integerList = new ArrayList<>();
+
+        for (WebElement element : webElementsList)
+            integerList.add(Converters.stringCutAndParseToInt(element.getText()));
+        return (Integer[]) integerList.toArray(new Integer[integerList.size()]);
     }
 
     public void selectSortingOption(String optionName) {
