@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import Pages.Allo.SearchResultsPage;
 import Steps.Base.BaseUtil;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 
 public class SearchResultsPageSteps extends BaseUtil {
@@ -31,5 +32,12 @@ public class SearchResultsPageSteps extends BaseUtil {
     public void searchResultsAreSortedByPriceLowToHigh() {
         SearchResultsPage searchResultsPage = new SearchResultsPage(getDriver());
         searchResultsPage.verifyThatAllProductCardsAreSortedByPriceLowToHigh();
+    }
+
+    @Step
+    @When("User select {string} sorting option")
+    public void userSelectSortingOption(String optionName) {
+        SearchResultsPage searchResultsPage = new SearchResultsPage(getDriver());
+        searchResultsPage.selectSortingOption(optionName);
     }
 }

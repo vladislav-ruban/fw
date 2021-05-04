@@ -1,8 +1,10 @@
 package Pages.Allo;
 
 import org.assertj.core.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
@@ -67,5 +69,12 @@ public class SearchResultsPage extends BasePage {
                   .as("Prices are sorted high to low\n" +
                           "Expected: low to high")
                   .isTrue();
+    }
+
+    public void selectSortingOption(String optionName) {
+        Actions action = new Actions(driver);
+        action.moveToElement(sortBySelect).perform();
+        WebElement option = driver.findElement(By.xpath(String.format(sortByOptionsPattern, optionName)));
+        option.click();
     }
 }
