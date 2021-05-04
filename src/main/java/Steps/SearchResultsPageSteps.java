@@ -25,4 +25,11 @@ public class SearchResultsPageSteps extends BaseUtil {
         SearchResultsPage searchResultsPage = new SearchResultsPage(getDriver());
         searchResultsPage.verifyThatAllProductCardsAreContainSearchQuery(searchQuery);
     }
+
+    @Step
+    @Then("Search results are sorted by price low to high")
+    public void searchResultsAreSortedByPriceLowToHigh() {
+        SearchResultsPage searchResultsPage = new SearchResultsPage(getDriver());
+        searchResultsPage.verifyThatAllProductCardsAreSortedByPriceLowToHigh();
+    }
 }
