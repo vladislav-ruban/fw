@@ -47,4 +47,11 @@ public class SearchResultsPageSteps extends BaseUtil {
         SearchResultsPage searchResultsPage = new SearchResultsPage(getDriver());
         searchResultsPage.selectSortingOption(optionName);
     }
+
+    @Step
+    @When("User adds {string} product to the cart")
+    public void userAddsProductToTheCart(String productName) {
+        SearchResultsPage searchResultsPage = new SearchResultsPage(getDriver());
+        searchResultsPage.clickAddProductToCartButton(productName);
+    }
 }

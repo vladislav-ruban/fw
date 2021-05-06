@@ -40,7 +40,13 @@ public class SearchResultsPage extends BasePage {
     @FindBy(xpath = ".//div[@class='sort-by__select']")
     private WebElement sortBySelect;
 
+    String addProductToCartButtonPattern = ".//a[@title='%s']/following-sibling::div[@class='product-card__buy-box']/button[contains(@class, 'buy-button')]";
     String sortByOptionsPattern = ".//ul[@class='sort-by__list']/li[text()='%s']";
+
+    public void clickAddProductToCartButton(String productName) {
+        WebElement addToCartButton = driver.findElement(By.xpath(String.format(addProductToCartButtonPattern, productName)));
+        addToCartButton.click();
+    }
 
     public void verifyThatAllProductCardsAreContainSearchQuery(String searchQuery) {
         List<String> productCardsTitlesString = new ArrayList<>();
