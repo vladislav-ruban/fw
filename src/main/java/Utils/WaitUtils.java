@@ -64,7 +64,7 @@ public class WaitUtils {
     }
 
     public void waitForElementToBeVisibleAfterRefresh(WebElement element) {
-        wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(element)));
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
     }
 
     public void waitForElementsToBeVisibleAfterRefresh(List<WebElement> list) {

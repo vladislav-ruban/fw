@@ -35,6 +35,13 @@ public class SearchResultsPageSteps extends BaseUtil {
     }
 
     @Step
+    @Then("Search results are sorted by price high to low")
+    public void searchResultsAreSortedByPriceHighToLow() {
+        SearchResultsPage searchResultsPage = new SearchResultsPage(getDriver());
+        searchResultsPage.verifyThatAllProductCardsAreSortedByPriceHighToLow();
+    }
+
+    @Step
     @When("User select {string} sorting option")
     public void userSelectSortingOption(String optionName) {
         SearchResultsPage searchResultsPage = new SearchResultsPage(getDriver());

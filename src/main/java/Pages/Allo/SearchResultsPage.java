@@ -28,6 +28,9 @@ public class SearchResultsPage extends BasePage {
     @FindBy(xpath = ".//li[contains(@class,'view-mode__item--active')]/button")
     private WebElement activeViewModeButton;
 
+    @FindBy(xpath = ".//div[@class='v-catalog v-сategory loading-block-gif']")
+    private WebElement loadingSpinner;
+
     @FindBy(xpath = ".//a[@class='product-card__title']")
     private List<WebElement> productCardsTitles;
 
@@ -54,6 +57,7 @@ public class SearchResultsPage extends BasePage {
     }
 
     public void verifyThatAllProductCardsAreSortedByPriceLowToHigh() {
+        waitUtils.waitForURLToContain("/dir-asc/order-price/");
         Integer[] productCardsPricesArray = listOfWebElementsParseToIntArray(productCardsPrices);
 
         boolean flag = true;
@@ -67,8 +71,9 @@ public class SearchResultsPage extends BasePage {
                           "Expected: low to high")
                   .isTrue();
     }
-
     public void verifyThatAllProductCardsAreSortedByPriceHighToLow() {
+        waitUtils.waitForURLToContain("/dir-desc/order-price/");
+
         Integer[] productCardsPricesArray = listOfWebElementsParseToIntArray(productCardsPrices);
 
         boolean flag = true;
