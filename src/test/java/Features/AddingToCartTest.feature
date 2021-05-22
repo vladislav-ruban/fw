@@ -10,3 +10,4 @@ Feature: adding to cart feature
     Examples:
       | productName                                       |
       | Samsung Galaxy A72 6/128GB Black (SM-A725FZKDSEK) |
+

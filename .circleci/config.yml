@@ -21,8 +21,7 @@ jobs:
             google-chrome --version
       - run: mvn clean test
 orbs:
-  browser-tools: circleci/browser-tools@x.y
-  version: 2.1
+  browser-tools: circleci/browser-tools@2.1
 
 workflows:
   # Below is the definition of your workflow.
