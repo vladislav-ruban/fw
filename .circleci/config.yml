@@ -14,7 +14,14 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      - run:
+          name: Browsers versions
+          command: |
+            chromedriver --version
+            google-chrome --version
       - run: mvn clean test
+orbs:
+  browser-tools: circleci/browser-tools@x.y
 
 workflows:
   # Below is the definition of your workflow.
