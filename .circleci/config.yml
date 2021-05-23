@@ -20,6 +20,12 @@ jobs:
             google-chrome --version
           name: check install
       - run: mvn clean test
+      - run:
+          name: Allure Report
+          command: mvn allure:report
+          when: always
+      - store_test_results:
+          path: target/allure-results
 orbs:
   browser-tools: circleci/browser-tools@1.1.3
 
