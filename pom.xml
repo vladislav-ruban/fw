@@ -37,7 +37,8 @@
                     </argLine>
                     <systemProperties>
                         <property>
-                            <allure.results.directory>${project.build.directory}\allure-results</allure.results.directory>
+                            <name>allure.results.directory</name>
+                            <value>${project.build.directory}\allure-results</value>
                         </property>
                     </systemProperties>
                 </configuration>
