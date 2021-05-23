@@ -25,7 +25,9 @@ jobs:
           command: mvn allure:report
           when: always
       - store_test_results:
-          path: target/allure-results
+          path: target/site/allure-maven-plugin
+      - store_artifacts:
+          path: target/site/allure-maven-plugin
 orbs:
   browser-tools: circleci/browser-tools@1.1.3
 
