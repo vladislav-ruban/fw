@@ -8,6 +8,6 @@ Feature: adding to cart feature
     Then User sees "<productName>" product in the cart
 
     Examples:
-      | productName                                       |
-      | Samsung Galaxy A72 6/128GB Black (SM-A725FZKDSEK) |
+      | productName                                                  |
+      | Набір для гри в дартс (мішень + провід) WINMAU «FAMILY GAME» |
 
