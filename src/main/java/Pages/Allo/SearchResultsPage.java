@@ -40,12 +40,31 @@ public class SearchResultsPage extends BasePage {
     @FindBy(xpath = ".//div[@class='sort-by__select']")
     private WebElement sortBySelect;
 
-    String addProductToCartButtonPattern = ".//a[@title='%s']/following-sibling::div[@class='product-card__buy-box']/button[contains(@class, 'buy-button')]";
+    @FindBy(xpath = ".//button[@class='compare-button compare-list__buttons-compare']")
+    private WebElement compareBlueButton;
+
+    String addProductToCartButtonPattern = ".//a[@title='%s']/following-sibling::div[@class='product-card__buy-box" +
+            "']/button[contains(@class, 'buy-button')]";
     String sortByOptionsPattern = ".//ul[@class='sort-by__list']/li[text()='%s']";
 
+    public void clickCompareBlueButton() {
+        waitUtils.waitForElementToBeVisible(compareBlueButton);
+        compareBlueButton.click();
+    }
+
     public void clickAddProductToCartButton(String productName) {
-        WebElement addToCartButton = driver.findElement(By.xpath(String.format(addProductToCartButtonPattern, productName)));
+        WebElement addToCartButton = driver.findElement(By.xpath(String.format(addProductToCartButtonPattern,
+                productName)));
         addToCartButton.click();
+    }
+
+    public void clickProductTitle(String productName) {
+        WebElement targetTitle = productCardsTitles.stream()
+                                                   .filter(title -> title.getText()
+                                                                         .equals(productName))
+                                                   .findFirst()
+                                                   .get();
+        targetTitle.click();
     }
 
     public void verifyThatAllProductCardsAreContainSearchQuery(String searchQuery) {
@@ -77,6 +96,7 @@ public class SearchResultsPage extends BasePage {
                           "Expected: low to high")
                   .isTrue();
     }
+
     public void verifyThatAllProductCardsAreSortedByPriceHighToLow() {
         waitUtils.waitForURLToContain("/dir-desc/order-price/");
 
@@ -104,7 +124,8 @@ public class SearchResultsPage extends BasePage {
 
     public void selectSortingOption(String optionName) {
         Actions action = new Actions(driver);
-        action.moveToElement(sortBySelect).perform();
+        action.moveToElement(sortBySelect)
+              .perform();
         WebElement option = driver.findElement(By.xpath(String.format(sortByOptionsPattern, optionName)));
         option.click();
     }

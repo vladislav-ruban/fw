@@ -54,4 +54,18 @@ public class SearchResultsPageSteps extends BaseUtil {
         SearchResultsPage searchResultsPage = new SearchResultsPage(getDriver());
         searchResultsPage.clickAddProductToCartButton(productName);
     }
+
+    @Step
+    @When("User clicks {string} product title")
+    public void userClicksProductTitle(String productName) {
+        SearchResultsPage searchResultsPage = new SearchResultsPage(getDriver());
+        searchResultsPage.clickProductTitle(productName);
+    }
+
+    @Step
+    @When("User clicks blue compare button")
+    public void userClicksBlueCompareButton() {
+        SearchResultsPage searchResultsPage = new SearchResultsPage(getDriver());
+        searchResultsPage.clickCompareBlueButton();
+    }
 }
