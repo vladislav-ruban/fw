@@ -13,6 +13,7 @@ public class BaseUtil {
     public void setDriver(WebDriver driver) { this.driver = driver;}
 
     public void openMainPage() {
+        System.out.println(Property.getProperty("mainPage"));
         getDriver().get(Property.getProperty("mainPage"));
     }
 }
