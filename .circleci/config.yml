@@ -14,6 +14,7 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      - browser-tools/install-firefox
       - browser-tools/install-chrome
       - run:
           command: |
