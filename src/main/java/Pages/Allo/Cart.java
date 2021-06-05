@@ -11,6 +11,13 @@ import java.util.List;
 import Pages.BasePage;
 
 public class Cart extends BasePage {
+
+    @FindBy(xpath = ".//div[contains(@class, 'cart-popup checkout_modal')]")
+    private WebElement cartPopup;
+
+    @FindBy(xpath = ".//div[contains(@class, 'cart-popup checkout_modal')]//li//div[@class='product__item']/div[@class='content']/div[@class='title']")
+    private List<WebElement> productCardsTitles;
+
     public Cart(WebDriver driver) {
         super(driver);
         initialWait(driver);
@@ -20,12 +27,6 @@ public class Cart extends BasePage {
     public void initialWait(WebDriver driver) {
         waitUtils.waitForElementToBeVisible(cartPopup);
     }
-
-    @FindBy(xpath = ".//div[contains(@class, 'cart-popup checkout_modal')]")
-    private WebElement cartPopup;
-
-    @FindBy(xpath = ".//div[contains(@class, 'cart-popup checkout_modal')]//li//div[@class='product__item']/div[@class='content']/div[@class='title']")
-    private List<WebElement> productCardsTitles;
 
     public void verifyThatProductIsInCart(String productName) {
         waitUtils.waitForElementsToBeVisible(productCardsTitles);

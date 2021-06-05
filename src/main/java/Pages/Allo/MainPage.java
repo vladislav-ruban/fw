@@ -7,6 +7,10 @@ import org.openqa.selenium.support.FindBy;
 import Pages.BasePage;
 
 public class MainPage extends BasePage {
+
+    @FindBy(xpath = "//div[@class='home-banner__pagination']")
+    private WebElement homeBannerPagination;
+
     public MainPage(WebDriver driver) {
         super(driver);
         initialWait(driver);
@@ -16,7 +20,4 @@ public class MainPage extends BasePage {
     public void initialWait(WebDriver driver) {
         waitUtils.waitForElementToBeVisible(homeBannerPagination);
     }
-
-    @FindBy(xpath = "//div[@class='home-banner__pagination']")
-    private WebElement homeBannerPagination;
 }
