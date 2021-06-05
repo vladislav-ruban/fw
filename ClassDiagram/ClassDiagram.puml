@@ -1,0 +1,91 @@
+@startuml
+package DriverFactory {
+    class DriverFactory {
+        + getBrowser() :WebDriver
+        - getChromeDriver() :WebDriver
+        - getFirefoxDriver() :WebDriver
+        - getEdgeDriver() :WebDriver
+    }
+}
+
+package Pages {
+    class BasePage {
+        - driver : WebDriver
+        # waitUtils : WaitUtils
+        + BasePage(driver:WebDriver)
+        + initialWait(driver:WebDriver) :void
+    }
+    package Allo {
+        class Cart extends BasePage {
+            - cartPopup : WebElement
+            - productCardsTitles : List<WebElements>
+            + Cart(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+            + verifyThatProductIsInCart(productName:String) :void
+        }
+        class ComparisonPage extends BasePage {
+            - productTitles : List<WebElements>
+            - compareHeaderContainer : WebElement
+            + ComparisonPage(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+            + isProductTitleDisplayed(productName:String) :void
+        }
+        class Header extends BasePage {
+            - searchBar : WebElement
+            - loginButton : WebElement
+            - actualNameSpan : WebElement
+            + Header(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+            + clickLoginButton() :void
+            + searchFor(searchQuery:String) :void
+            + verifyName(expectedName:String) :void
+        }
+        class LoginAndRegistrarionPopup extends BasePage {
+            - loginTabActive : WebElement
+            - emailInput : WebElement
+            - passwordInput : WebElement
+            - submitButton : WebElement
+            + LoginAndRegistrationPopup(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+            + setEmailInput(email:String) :void
+            + setPasswordInput(password:String) :void
+            + clickSubmitButton() :void
+
+        }
+        class MainPage extends BasePage
+        class ProductPage extends BasePage
+        class SearchResultPage extends BasePage
+    }
+}
+
+package Steps {
+    package Base {
+        class BaseUtil {
+            - driver : WebDriver
+            + getMainPage() : void
+            + getDriver() : WebDriver
+        }
+        class BaseTest extends BaseUtil
+    }
+    class BrowserSteps extends BaseUtil
+    class CartSteps extends BaseUtil
+    class ComparisonPageSteps extends BaseUtil
+    class HeaderSteps extends BaseUtil
+    class LoginAndRegistrarionPopupSteps extends BaseUtil
+    class MainPageSteps extends BaseUtil
+    class ProductPageSteps extends BaseUtil
+    class SearchResultPageSteps extends BaseUtil
+}
+package Utils {
+    class Property {
+        + public void getProperty()
+    }
+
+    class Converters
+    class ScheenshotUtil
+    class WaitUtils
+}
+
+Property --- BaseUtil
+
+@enduml
