@@ -43,7 +43,7 @@ public class BaseTest extends BaseUtil {
             File scrFile = ((TakesScreenshot) base.getDriver()).getScreenshotAs(OutputType.FILE);
             String screenshotName = String.format("%s_%s", scenario.getName(), dateFormat.format(calendar.getTime()));
             try {
-                FileUtils.copyFile(scrFile, new File(String.format("./target/site/allure-maven-plugin/%s.png", screenshotName)));
+                FileUtils.copyFile(scrFile, new File(String.format("./Screenshots/%s.png", screenshotName)));
             } catch (IOException e) {
                 e.printStackTrace();
             }
