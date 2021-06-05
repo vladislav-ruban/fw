@@ -15,9 +15,9 @@ import Utils.Converters;
 
 public class SearchResultsPage extends BasePage {
 
-    String addProductToCartButtonPattern = ".//a[@title='%s']/following-sibling::div[@class='product-card__buy-box" +
+    private String addProductToCartButtonPattern = ".//a[@title='%s']/following-sibling::div[@class='product-card__buy-box" +
             "']/button[contains(@class, 'buy-button')]";
-    String sortByOptionsPattern = ".//ul[@class='sort-by__list']/li[text()='%s']";
+    private String sortByOptionsPattern = ".//ul[@class='sort-by__list']/li[text()='%s']";
 
     @FindBy(xpath = ".//li[contains(@class,'view-mode__item--active')]/button")
     private WebElement activeViewModeButton;

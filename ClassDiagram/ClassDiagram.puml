@@ -52,9 +52,40 @@ package Pages {
             + clickSubmitButton() :void
 
         }
-        class MainPage extends BasePage
-        class ProductPage extends BasePage
-        class SearchResultPage extends BasePage
+        class MainPage extends BasePage {
+            - homeBannerPagination : WebElement
+            + MainPage(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+        }
+        class ProductPage extends BasePage {
+            - shippingBrandLink : WebElement
+            - addToCompareButton : WebElement
+            - getAddToCompareButtonActive : WebElement
+            + ProductPage(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+            + clickAddToCompareButtonOnMainTradePanel() :void
+            + isCompareButtonActiveOnMainTradePanel() :void
+        }
+        class SearchResultPage extends BasePage {
+            - addProductToCartButtonPattern : String
+            - sortByOptionsPattern : String
+            - activeViewModeButton : WebElement
+            - loadingSpinner : WebElement
+            - productCardsTitles : List<WebElements>
+            - productCardsPrices : List<WebElements>
+            - sortBySelect : WebElement
+            - compareBlueButton : WebElement
+            + SearchResultsPage(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+            + clickCompareBlueButton() :void
+            + clickAddProductToCartButton(productName:String) :void
+            + clickProductTitle(productName:String) :void
+            + verifyThatAllProductCardsAreContainSearchQuery(searchQuery:String) :void
+            + verifyThatAllProductCardsAreSortedByPriceLowToHigh() :void
+            + verifyThatAllProductCardsAreSortedByPriceHighToLow() :void
+            - listOfWebElementsParseToIntArray(webElementsList:List<WebElements>) :Integer[]
+            + selectSortingOption(optionName:String)
+        }
     }
 }
 
