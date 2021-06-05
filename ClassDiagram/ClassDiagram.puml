@@ -1,4 +1,5 @@
 @startuml
+package framework {
 package DriverFactory {
     class DriverFactory {
         + getBrowser() :WebDriver
@@ -191,7 +192,7 @@ package Utils {
         + waitForElementsToBeVisibleAfterRefresh(list:List<WebElements>) :void
     }
 }
-
+}
+BasePage --- WaitUtils
 Property --- BaseUtil
-
 @enduml
