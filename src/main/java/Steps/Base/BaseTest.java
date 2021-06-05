@@ -1,15 +1,7 @@
 package Steps.Base;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import DriverFactory.DriverFactory;
+import Utils.ScreenshotUtil;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -37,16 +29,10 @@ public class BaseTest extends BaseUtil {
 
     @After(order = 2)
     public void tearDown(Scenario scenario) {
-        if(scenario.isFailed()) {
-            Calendar calendar = Calendar.getInstance();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-            File scrFile = ((TakesScreenshot) base.getDriver()).getScreenshotAs(OutputType.FILE);
-            String screenshotName = String.format("%s_%s", scenario.getName(), dateFormat.format(calendar.getTime()));
-            try {
-                FileUtils.copyFile(scrFile, new File(String.format("./Screenshots/%s.png", screenshotName)));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (scenario.isFailed()) {
+            scenario.attach(ScreenshotUtil.screenshot(scenario, base.getDriver()),
+                    "image/png",
+                    ScreenshotUtil.getScreenshotName(scenario));
         }
         base.getDriver()
             .close();
