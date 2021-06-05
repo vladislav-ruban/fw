@@ -96,25 +96,100 @@ package Steps {
             + getMainPage() : void
             + getDriver() : WebDriver
         }
-        class BaseTest extends BaseUtil
+        class BaseTest extends BaseUtil {
+            ~ base : BaseUtil
+            + setUp() :void
+            + tearDown(scenario:Scenario) :void
+        }
     }
-    class BrowserSteps extends BaseUtil
-    class CartSteps extends BaseUtil
-    class ComparisonPageSteps extends BaseUtil
-    class HeaderSteps extends BaseUtil
-    class LoginAndRegistrarionPopupSteps extends BaseUtil
-    class MainPageSteps extends BaseUtil
-    class ProductPageSteps extends BaseUtil
-    class SearchResultPageSteps extends BaseUtil
+    class BrowserSteps extends BaseUtil {
+        ~base : BaseUtil
+        + BrowserSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userNavigatesToPreviousPage() :void
+    }
+    class CartSteps extends BaseUtil {
+        ~base : BaseUtil
+        + CartSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userSeesProductInTheCart(productName:String) :void
+    }
+    class ComparisonPageSteps extends BaseUtil {
+        ~base : BaseUtil
+        + ComparisonPageSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userSeesProductTitleOnComparisonPage(productTitle:String) :void
+    }
+    class HeaderSteps extends BaseUtil {
+        ~ base : BaseUtil
+        + HeaderSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userEntersSearchQueryToSearchBar(searchQuery:String) :void
+        + userClicksLoginButtonOnMainPage() :void
+        + userSeesThatHeLoggedInAs(accountFirstName:String) :void
+    }
+    class LoginAndRegistrarionPopupSteps extends BaseUtil {
+        ~ base : BaseUtil
+        + LoginAndRegistrarionPopupSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userLogsInWithEmailAndPassword(email:String,password:String) :void
+    }
+    class MainPageSteps extends BaseUtil {
+        ~ base : BaseUtil
+        + MainPageSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userNavigatesToMainPage() :void
+    }
+    class ProductPageSteps extends BaseUtil {
+        ~ base : BaseUtil
+        + ProductPageSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userClicksCompareButtonOnMainTradePanel() :void
+        + compareButtonIsActiveOnMainTradePanel() :void
+    }
+    class SearchResultPageSteps extends BaseUtil {
+        ~ base : BaseUtil
+        + SearchResultPageSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + searchResultsAreContainSearchQuery(searchQuery:String) :void
+        + searchResultsAreSortedByPriceLowToHigh() :void
+        + searchResultsAreSortedByPriceHighToLow() :void
+        + userSelectSortingOption(optionName:String) :void
+        + userAddsProductToTheCart(productName:String) :void
+        + userClicksProductTitle(productName:String) :void
+        + userClicksBlueCompareButton() :void
+    }
 }
 package Utils {
     class Property {
-        + public void getProperty()
+        - properties : Properties
+        + getProperty(key:String) :String
     }
-
-    class Converters
-    class ScheenshotUtil
-    class WaitUtils
+    class Converters {
+        + stringCutAndParseToInt(string:String) :int
+    }
+    class ScheenshotUtil {
+        + getScreenshotName(scenario:Scenario) :String
+        + screenshot(scenario:Scenario,driver:WebDriver) :byte[]
+    }
+    class WaitUtils {
+        ~ driver : WebDriver
+        - wait : WebDriverWait
+        - fluentWait : Wait
+        + WaitUtils(driver:WebDriver)
+        + waitForElementToBeClickable(element:WebElement) :void
+        + waitForURLToContain(expectedURLPart:String) :void
+        + waitForElementToBeVisible(element:WebElement) :void
+        + waitForElementsToBeVisible(listWebElements:List<WebElements>) :void
+        + waitForElementToBeInvisible(element:WebElement) :void
+        + waitForElementsToBeInvisible(listWebElements:List<WebElements>) :void
+        + waitForElementToContainText(element:WebElement) :void
+        + waitForElementPresenceBy(locator:By) :void
+        + waitForElementsPresenceBy(locator:By) :void
+        + waitForElementToBeClickable(locator:By) :void
+        + waitForElementToBeVisibleAfterRefresh(element:WebElement) :void
+        + waitForElementsToBeVisibleAfterRefresh(list:List<WebElements>) :void
+    }
 }
 
 Property --- BaseUtil
