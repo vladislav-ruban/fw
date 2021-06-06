@@ -32,6 +32,8 @@ public class DriverFactory {
                         .setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
+        options.addArguments("--ignore-ssl-errors=yes", "--ignore-certificate-errors");
+        options.addArguments("--headless");
         //options.addArguments("start-maximized");
         return new ChromeDriver(options);
     }

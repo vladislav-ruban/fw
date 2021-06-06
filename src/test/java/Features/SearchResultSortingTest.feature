@@ -12,4 +12,3 @@ Feature: search feature
     When User enters "bosch" to search bar
     When User select "від дорогих до дешевих" sorting option
     Then Search results are sorted by price high to low
-
