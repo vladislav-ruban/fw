@@ -1,4 +1,4 @@
-Feature: search feature
+Feature: search sorting feature
   This feature deals with the search results sorting functionality of the application
 
   Scenario: Sort search results by price low to high
@@ -12,4 +12,3 @@ Feature: search feature
     When User enters "bosch" to search bar
     When User select "від дорогих до дешевих" sorting option
     Then Search results are sorted by price high to low
-
