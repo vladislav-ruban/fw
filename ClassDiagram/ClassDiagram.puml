@@ -1,0 +1,198 @@
+@startuml
+package framework {
+package DriverFactory {
+    class DriverFactory {
+        + getBrowser() :WebDriver
+        - getChromeDriver() :WebDriver
+        - getFirefoxDriver() :WebDriver
+        - getEdgeDriver() :WebDriver
+    }
+}
+
+package Pages {
+    class BasePage {
+        - driver : WebDriver
+        # waitUtils : WaitUtils
+        + BasePage(driver:WebDriver)
+        + initialWait(driver:WebDriver) :void
+    }
+    package Allo {
+        class Cart extends BasePage {
+            - cartPopup : WebElement
+            - productCardsTitles : List<WebElements>
+            + Cart(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+            + verifyThatProductIsInCart(productName:String) :void
+        }
+        class ComparisonPage extends BasePage {
+            - productTitles : List<WebElements>
+            - compareHeaderContainer : WebElement
+            + ComparisonPage(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+            + isProductTitleDisplayed(productName:String) :void
+        }
+        class Header extends BasePage {
+            - searchBar : WebElement
+            - loginButton : WebElement
+            - actualNameSpan : WebElement
+            + Header(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+            + clickLoginButton() :void
+            + searchFor(searchQuery:String) :void
+            + verifyName(expectedName:String) :void
+        }
+        class LoginAndRegistrarionPopup extends BasePage {
+            - loginTabActive : WebElement
+            - emailInput : WebElement
+            - passwordInput : WebElement
+            - submitButton : WebElement
+            + LoginAndRegistrationPopup(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+            + setEmailInput(email:String) :void
+            + setPasswordInput(password:String) :void
+            + clickSubmitButton() :void
+
+        }
+        class MainPage extends BasePage {
+            - homeBannerPagination : WebElement
+            + MainPage(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+        }
+        class ProductPage extends BasePage {
+            - shippingBrandLink : WebElement
+            - addToCompareButton : WebElement
+            - getAddToCompareButtonActive : WebElement
+            + ProductPage(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+            + clickAddToCompareButtonOnMainTradePanel() :void
+            + isCompareButtonActiveOnMainTradePanel() :void
+        }
+        class SearchResultPage extends BasePage {
+            - addProductToCartButtonPattern : String
+            - sortByOptionsPattern : String
+            - activeViewModeButton : WebElement
+            - loadingSpinner : WebElement
+            - productCardsTitles : List<WebElements>
+            - productCardsPrices : List<WebElements>
+            - sortBySelect : WebElement
+            - compareBlueButton : WebElement
+            + SearchResultsPage(driver:WebDriver)
+            + initialWait(driver:WebDriver) :void
+            + clickCompareBlueButton() :void
+            + clickAddProductToCartButton(productName:String) :void
+            + clickProductTitle(productName:String) :void
+            + verifyThatAllProductCardsAreContainSearchQuery(searchQuery:String) :void
+            + verifyThatAllProductCardsAreSortedByPriceLowToHigh() :void
+            + verifyThatAllProductCardsAreSortedByPriceHighToLow() :void
+            - listOfWebElementsParseToIntArray(webElementsList:List<WebElements>) :Integer[]
+            + selectSortingOption(optionName:String)
+        }
+    }
+}
+
+package Steps {
+    package Base {
+        class BaseUtil {
+            - driver : WebDriver
+            + getMainPage() : void
+            + getDriver() : WebDriver
+        }
+        class BaseTest extends BaseUtil {
+            ~ base : BaseUtil
+            + setUp() :void
+            + tearDown(scenario:Scenario) :void
+        }
+    }
+    class BrowserSteps extends BaseUtil {
+        ~base : BaseUtil
+        + BrowserSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userNavigatesToPreviousPage() :void
+    }
+    class CartSteps extends BaseUtil {
+        ~base : BaseUtil
+        + CartSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userSeesProductInTheCart(productName:String) :void
+    }
+    class ComparisonPageSteps extends BaseUtil {
+        ~base : BaseUtil
+        + ComparisonPageSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userSeesProductTitleOnComparisonPage(productTitle:String) :void
+    }
+    class HeaderSteps extends BaseUtil {
+        ~ base : BaseUtil
+        + HeaderSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userEntersSearchQueryToSearchBar(searchQuery:String) :void
+        + userClicksLoginButtonOnMainPage() :void
+        + userSeesThatHeLoggedInAs(accountFirstName:String) :void
+    }
+    class LoginAndRegistrarionPopupSteps extends BaseUtil {
+        ~ base : BaseUtil
+        + LoginAndRegistrarionPopupSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userLogsInWithEmailAndPassword(email:String,password:String) :void
+    }
+    class MainPageSteps extends BaseUtil {
+        ~ base : BaseUtil
+        + MainPageSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userNavigatesToMainPage() :void
+    }
+    class ProductPageSteps extends BaseUtil {
+        ~ base : BaseUtil
+        + ProductPageSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + userClicksCompareButtonOnMainTradePanel() :void
+        + compareButtonIsActiveOnMainTradePanel() :void
+    }
+    class SearchResultPageSteps extends BaseUtil {
+        ~ base : BaseUtil
+        + SearchResultPageSteps(base:BaseUtil)
+        + getDriver() :WebDriver
+        + searchResultsAreContainSearchQuery(searchQuery:String) :void
+        + searchResultsAreSortedByPriceLowToHigh() :void
+        + searchResultsAreSortedByPriceHighToLow() :void
+        + userSelectSortingOption(optionName:String) :void
+        + userAddsProductToTheCart(productName:String) :void
+        + userClicksProductTitle(productName:String) :void
+        + userClicksBlueCompareButton() :void
+    }
+}
+package Utils {
+    class Property {
+        - properties : Properties
+        + getProperty(key:String) :String
+    }
+    class Converters {
+        + stringCutAndParseToInt(string:String) :int
+    }
+    class ScheenshotUtil {
+        + getScreenshotName(scenario:Scenario) :String
+        + screenshot(scenario:Scenario,driver:WebDriver) :byte[]
+    }
+    class WaitUtils {
+        ~ driver : WebDriver
+        - wait : WebDriverWait
+        - fluentWait : Wait
+        + WaitUtils(driver:WebDriver)
+        + waitForElementToBeClickable(element:WebElement) :void
+        + waitForURLToContain(expectedURLPart:String) :void
+        + waitForElementToBeVisible(element:WebElement) :void
+        + waitForElementsToBeVisible(listWebElements:List<WebElements>) :void
+        + waitForElementToBeInvisible(element:WebElement) :void
+        + waitForElementsToBeInvisible(listWebElements:List<WebElements>) :void
+        + waitForElementToContainText(element:WebElement) :void
+        + waitForElementPresenceBy(locator:By) :void
+        + waitForElementsPresenceBy(locator:By) :void
+        + waitForElementToBeClickable(locator:By) :void
+        + waitForElementToBeVisibleAfterRefresh(element:WebElement) :void
+        + waitForElementsToBeVisibleAfterRefresh(list:List<WebElements>) :void
+    }
+}
+}
+BasePage --- WaitUtils
+Property --- BaseUtil
+@enduml

@@ -15,15 +15,9 @@ import Utils.Converters;
 
 public class SearchResultsPage extends BasePage {
 
-    public SearchResultsPage(WebDriver driver) {
-        super(driver);
-        initialWait(driver);
-    }
-
-    @Override
-    public void initialWait(WebDriver driver) {
-        waitUtils.waitForElementToBeVisible(activeViewModeButton);
-    }
+    private String addProductToCartButtonPattern = ".//a[@title='%s']/following-sibling::div[@class='product-card__buy-box" +
+            "']/button[contains(@class, 'buy-button')]";
+    private String sortByOptionsPattern = ".//ul[@class='sort-by__list']/li[text()='%s']";
 
     @FindBy(xpath = ".//li[contains(@class,'view-mode__item--active')]/button")
     private WebElement activeViewModeButton;
@@ -43,9 +37,15 @@ public class SearchResultsPage extends BasePage {
     @FindBy(xpath = ".//button[@class='compare-button compare-list__buttons-compare']")
     private WebElement compareBlueButton;
 
-    String addProductToCartButtonPattern = ".//a[@title='%s']/following-sibling::div[@class='product-card__buy-box" +
-            "']/button[contains(@class, 'buy-button')]";
-    String sortByOptionsPattern = ".//ul[@class='sort-by__list']/li[text()='%s']";
+    public SearchResultsPage(WebDriver driver) {
+        super(driver);
+        initialWait(driver);
+    }
+
+    @Override
+    public void initialWait(WebDriver driver) {
+        waitUtils.waitForElementToBeVisible(activeViewModeButton);
+    }
 
     public void clickCompareBlueButton() {
         waitUtils.waitForElementToBeVisible(compareBlueButton);

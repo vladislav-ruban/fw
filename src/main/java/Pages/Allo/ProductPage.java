@@ -9,16 +9,6 @@ import Pages.BasePage;
 
 public class ProductPage extends BasePage {
 
-    public ProductPage(WebDriver driver) {
-        super(driver);
-        initialWait(driver);
-    }
-
-    @Override
-    public void initialWait(WebDriver driver) {
-        waitUtils.waitForElementToBeVisible(shippingBrandLink);
-    }
-
     @FindBy(xpath = ".//a[@class='shipping-brand__link']")
     private WebElement shippingBrandLink;
 
@@ -28,6 +18,16 @@ public class ProductPage extends BasePage {
     @FindBy(xpath =
             ".//div[@class='p-trade-wrapper p-main__trade']/descendant::div[@class='p-actions__item compare active']")
     private WebElement getAddToCompareButtonActive;
+
+    public ProductPage(WebDriver driver) {
+        super(driver);
+        initialWait(driver);
+    }
+
+    @Override
+    public void initialWait(WebDriver driver) {
+        waitUtils.waitForElementToBeVisible(shippingBrandLink);
+    }
 
     public void clickAddToCompareButtonOnMainTradePanel() {
         addToCompareButton.click();

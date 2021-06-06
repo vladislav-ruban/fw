@@ -8,16 +8,6 @@ import Pages.BasePage;
 
 public class LoginAndRegistrationPopup extends BasePage {
 
-    public LoginAndRegistrationPopup(WebDriver driver) {
-        super(driver);
-        initialWait(driver);
-    }
-
-    @Override
-    public void initialWait(WebDriver driver) {
-        waitUtils.waitForElementToBeVisible(loginTabActive);
-    }
-
     @FindBy(xpath = ".//li[@class='login-tab active']")
     private WebElement loginTabActive;
 
@@ -29,6 +19,16 @@ public class LoginAndRegistrationPopup extends BasePage {
 
     @FindBy(xpath = ".//button[@class='modal-submit-button']")
     private WebElement submitButton;
+
+    public LoginAndRegistrationPopup(WebDriver driver) {
+        super(driver);
+        initialWait(driver);
+    }
+
+    @Override
+    public void initialWait(WebDriver driver) {
+        waitUtils.waitForElementToBeVisible(loginTabActive);
+    }
 
     public void setEmailInput(String email) {
         emailInput.click();

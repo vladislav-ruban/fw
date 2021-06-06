@@ -8,15 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import Pages.BasePage;
 
 public class Header extends BasePage {
-    public Header(WebDriver driver) {
-        super(driver);
-        initialWait(driver);
-    }
-
-    @Override
-    public void initialWait(WebDriver driver) {
-        waitUtils.waitForElementToBeVisible(searchBar);
-    }
 
     @FindBy(xpath = ".//input[@id='search-form__input']")
     private WebElement searchBar;
@@ -26,6 +17,16 @@ public class Header extends BasePage {
 
     @FindBy(xpath = ".//div[@class='name-container']/span")
     private WebElement actualNameSpan;
+
+    public Header(WebDriver driver) {
+        super(driver);
+        initialWait(driver);
+    }
+
+    @Override
+    public void initialWait(WebDriver driver) {
+        waitUtils.waitForElementToBeVisible(searchBar);
+    }
 
     public void clickLoginButton() {
         waitUtils.waitForElementToBeVisible(loginButton);

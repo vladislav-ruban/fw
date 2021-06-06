@@ -12,6 +12,12 @@ import Pages.BasePage;
 
 public class ComparisonPage extends BasePage {
 
+    @FindBy(xpath = ".//a[@class='product-name']")
+    private List<WebElement> productTitles;
+
+    @FindBy(xpath = ".//td[@class='compare-header']")
+    private WebElement compareHeaderContainer;
+
     public ComparisonPage(WebDriver driver) {
         super(driver);
         initialWait(driver);
@@ -21,12 +27,6 @@ public class ComparisonPage extends BasePage {
     public void initialWait(WebDriver driver) {
         waitUtils.waitForElementToBeVisible(compareHeaderContainer);
     }
-
-    @FindBy(xpath = ".//a[@class='product-name']")
-    private List<WebElement> productTitles;
-
-    @FindBy(xpath = ".//td[@class='compare-header']")
-    private WebElement compareHeaderContainer;
 
     public void isProductTitleDisplayed(String productName) {
         ArrayList<String> productTitlesString = new ArrayList<>();
