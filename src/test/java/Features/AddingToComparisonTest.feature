@@ -17,6 +17,6 @@ Feature: adding to comparison feature
     Then User sees "<secondProductName>" product title on comparison page
 
     Examples:
-      | firstProductName              | secondProductName                   |
-      | Дартс Play Sport D-41см 19883 | Дартс З Чарками (29Х22Х4 См) 230811 |
+      | firstProductName              | secondProductName       |
+      | Дартс Play Sport D-41см 19883 | Дартс Play D-15см 23447 |
 
