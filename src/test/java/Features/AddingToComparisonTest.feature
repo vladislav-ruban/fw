@@ -19,4 +19,3 @@ Feature: adding to comparison feature
     Examples:
       | firstProductName              | secondProductName       |
       | Дартс Play Sport D-41см 19883 | Дартс Play D-15см 23447 |
-
