@@ -12,10 +12,10 @@ import Pages.BasePage;
 
 public class ComparisonPage extends BasePage {
 
-    @FindBy(xpath = ".//a[@class='product-name']")
+    @FindBy(xpath = ".//a[@class='product-card__title']")
     private List<WebElement> productTitles;
 
-    @FindBy(xpath = ".//td[@class='compare-header']")
+    @FindBy(xpath = ".//div[@class='compare-page']")
     private WebElement compareHeaderContainer;
 
     public ComparisonPage(WebDriver driver) {
@@ -35,7 +35,8 @@ public class ComparisonPage extends BasePage {
             productTitlesString.add(title.getText());
 
         Assertions.assertThat(productTitlesString.contains(productName))
-                  .as("Product title %s is not displayed on comparison page\n", productName)
+                  .as("Product title %s is not displayed on comparison page\n" +
+                          "Didplayed: %s", productName, productTitles)
                   .isTrue();
     }
 }

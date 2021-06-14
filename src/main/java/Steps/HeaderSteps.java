@@ -23,7 +23,7 @@ public class HeaderSteps extends BaseUtil {
 
     @Step
     @When("User enters {string} to search bar")
-    public void userEntersSearchQueryToSearchBar(String searchQuery) {
+    public void userEntersToSearchBar(String searchQuery) {
         Header header = new Header(getDriver());
         header.searchFor(searchQuery);
     }
